@@ -1,0 +1,33 @@
+@import "styles/sass/main";
+
+.Form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  width: 300px;
+
+  &__error {
+    position: absolute;
+    top: -26px;
+    left: 0;
+    display: none;
+    width: 100%;
+    text-align: center;
+    color: red;
+    background: whitesmoke;
+
+    &_active {
+      display: block;
+    }
+  }
+
+  &__button {
+    transition: all 0.25s;
+
+    &:hover {
+      cursor: pointer;
+      filter: brightness(80%);
+    }
+  }
+}
