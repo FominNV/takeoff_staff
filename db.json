@@ -1,0 +1,51 @@
+{
+  "auth": [
+    {
+      "id": 1,
+      "username": "User",
+      "password": "password"
+    },
+    {
+      "id": 2,
+      "username": "User2",
+      "password": "password2"
+    }
+  ],
+  "contacts": [
+    {
+      "userId": 1,
+      "book": [
+        {
+          "id": 1,
+          "name": "Father",
+          "phone": 88009001010
+        },
+        {
+          "id": 2,
+          "name": "Mother",
+          "phone": 88009001020
+        },
+        {
+          "id": 3,
+          "name": "Brother",
+          "phone": 88009001030
+        },
+        {
+          "id": 4,
+          "name": "GrandFather",
+          "phone": 88009001040
+        },
+        {
+          "id": 5,
+          "name": "GrangMother",
+          "phone": 88009001050
+        },
+        {
+          "id": 6,
+          "name": "Uncle",
+          "phone": 88009001060
+        }
+      ]
+    }
+  ]
+}
