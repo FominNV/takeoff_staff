@@ -22,7 +22,7 @@ const Form: FC = () => {
     if (e.currentTarget.value) setPassword(e.currentTarget.value);
   }, []);
 
-  const onSubmitHandler = useCallback<EventFunc<FormEvent>>(async (e) => {
+  const onSubmitHandler = useCallback<EventFunc<FormEvent>>((e) => {
     e.preventDefault();
     dispatch(loginUser({ username, password }));
   }, [username, password, dispatch]);
