@@ -13,39 +13,46 @@
   ],
   "contacts": [
     {
+      "id": 1,
       "userId": 1,
-      "book": [
-        {
-          "id": 1,
-          "name": "Father",
-          "phone": 88009001010
-        },
-        {
-          "id": 2,
-          "name": "Mother",
-          "phone": 88009001020
-        },
-        {
-          "id": 3,
-          "name": "Brother",
-          "phone": 88009001030
-        },
-        {
-          "id": 4,
-          "name": "GrandFather",
-          "phone": 88009001040
-        },
-        {
-          "id": 5,
-          "name": "GrangMother",
-          "phone": 88009001050
-        },
-        {
-          "id": 6,
-          "name": "Uncle",
-          "phone": 88009001060
-        }
-      ]
+      "name": "Father",
+      "phone": 88009001010
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "name": "Mother",
+      "phone": 88009001020
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "name": "Brother",
+      "phone": 88009001030
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "name": "GrandFather",
+      "phone": 88009001040
+    },
+    {
+      "userId": 1,
+      "name": "GrandMother",
+      "phone": 88009001055,
+      "id": 5
+    },
+    {
+      "id": 6,
+      "userId": 1,
+      "name": "Uncle",
+      "phone": 88009001060
+    },
+    {
+      "userId": 1,
+      "name": "Nikolay Fomin",
+      "phone": 79049664716,
+      "id": 7
     }
   ]
 }
