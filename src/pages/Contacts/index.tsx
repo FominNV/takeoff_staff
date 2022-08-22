@@ -1,6 +1,7 @@
 import Table from "components/Table";
 import {
-  FC, MouseEvent, ReactNode, useCallback, useEffect, useMemo,
+  ChangeEvent,
+  FC, MouseEvent, ReactNode, useCallback, useEffect, useMemo, useState,
 } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -12,12 +13,17 @@ import "./styles.scss";
 
 const Contacts: FC = () => {
   const { user, contacts } = useTypedSelector((state) => state.user);
+  const [filterContacts, setFilterContacts] = useState<string>("");
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const getContacts = useCallback<VoidFunc<number>>((userId) => {
-    dispatch(getUserContacts(userId));
+  const filterOnChangeHandler = useCallback<EventFunc<ChangeEvent<HTMLInputElement>>>((e) => {
+    setFilterContacts(e.currentTarget.value);
+  }, []);
+
+  const getContacts = useCallback<VoidFunc<number>>(async (userId) => {
+    await dispatch(getUserContacts(userId));
   }, [dispatch]);
 
   const logoutCurrentUser = useCallback<EventFunc<MouseEvent>>(() => {
@@ -25,19 +31,30 @@ const Contacts: FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (user === null && location.pathname === "/takeoff_staff/contacts") {
+    if (!user && location.pathname === "/takeoff_staff/contacts") {
       navigate(PATHS.LOGIN);
-    } else if (user && location.pathname === "/takeoff_staff/contacts") {
+    } else if (!contacts && user && location.pathname === "/takeoff_staff/contacts") {
       getContacts(user.id);
     }
-  }, [user, location.pathname, getContacts, navigate]);
+  }, [user, contacts, location.pathname, getContacts, navigate]);
 
   const contactsTable = useMemo<ReactNode>(() => (
-    contacts && <Table data={contacts} />
-  ), [contacts]);
+    contacts && (
+    <Table
+      data={contacts}
+      filter={filterContacts}
+    />
+    )
+  ), [contacts, filterContacts]);
 
   return (
     <div className="Contacts">
+      <input
+        type="text"
+        onChange={filterOnChangeHandler}
+        value={filterContacts}
+      />
+
       {contactsTable}
       <button
         className="Contacts__button-logout"
