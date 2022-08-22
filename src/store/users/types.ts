@@ -22,31 +22,42 @@ export interface IUserResponseData {
   password: string;
 }
 
-export interface IContact {
-  id: number
-  name: string
-  phone: number
+export interface IContactFetchData {
+  userId: number;
+  name: string;
+  phone: number;
 }
 
-export interface IUserContacts {
-  userId: number
-  book: IContact[]
+export interface IContact extends IContactFetchData {
+  id: number
 }
 
 export interface IResponse {
-  data: IUserResponseData[] | IUserContacts[]
+  data: IUserResponseData[] | IContact[]
 }
 
 export enum UserActionTypes {
   SET_USER = "SET_USER",
-  SET_CONTACTS = "SET_CONTACTS",
   LOGOUT_USER = "LOGOUT_USER",
+  GET_CONTACTS = "GET_CONTACTS",
+  CREATE_CONTACT = "CREATE_CONTACT",
+  UPDATE_CONTACT = "UPDATE_CONTACT",
+  DELETE_CONTACT = "DELETE_CONTACT",
 }
 
 export type UserFetchType = (data: IUserFetchData) =>
 (dispatch: Dispatch<UserAction>) => Promise<void>;
 
 export type GetUserContactsType = (userId: number) =>
+(dispatch: Dispatch<UserAction>) => Promise<void>;
+
+export type CreateContactType = (data: IContactFetchData) =>
+(dispatch: Dispatch<UserAction>) => Promise<void>;
+
+export type UpdateContactType = (contactId: number, data: IContactFetchData) =>
+(dispatch: Dispatch<UserAction>) => Promise<void>;
+
+export type DeleteContactType = (contactId: number) =>
 (dispatch: Dispatch<UserAction>) => Promise<void>;
 
 export type UserLogoutType = () => void;
@@ -56,14 +67,35 @@ type SetUserAction = {
   payload: { user: Nullable<IUser>, error: boolean };
 };
 
-type SetContactsAction = {
-  type: UserActionTypes.SET_CONTACTS,
-  payload: { contacts: Nullable<IContact[]> };
-};
-
 type LogoutUserAction = {
   type: UserActionTypes.LOGOUT_USER,
   payload: { user: null, contacts: null };
 };
 
-export type UserAction = SetUserAction | SetContactsAction | LogoutUserAction;
+type GetContactsAction = {
+  type: UserActionTypes.GET_CONTACTS,
+  payload: { contacts: Nullable<IContact[]>, error: boolean };
+};
+
+type CreateContactAction = {
+  type: UserActionTypes.CREATE_CONTACT,
+  payload: { error: boolean; };
+};
+
+type UpdateContactAction = {
+  type: UserActionTypes.UPDATE_CONTACT,
+  payload: { error: boolean; };
+};
+
+type DeleteContactAction = {
+  type: UserActionTypes.DELETE_CONTACT,
+  payload: { error: boolean; };
+};
+
+export type UserAction =
+  SetUserAction |
+  GetContactsAction |
+  LogoutUserAction |
+  CreateContactAction |
+  UpdateContactAction |
+  DeleteContactAction;

@@ -18,17 +18,36 @@ export function userReducer(
         error: action.payload.error,
       };
 
-    case UserActionTypes.SET_CONTACTS:
-      return {
-        ...state,
-        contacts: action.payload.contacts,
-      };
-
     case UserActionTypes.LOGOUT_USER:
       return {
         ...state,
         user: action.payload.user,
         contacts: action.payload.contacts,
+      };
+
+    case UserActionTypes.GET_CONTACTS:
+      return {
+        ...state,
+        contacts: action.payload.contacts,
+        error: action.payload.error,
+      };
+
+    case UserActionTypes.CREATE_CONTACT:
+      return {
+        ...state,
+        error: action.payload.error,
+      };
+
+    case UserActionTypes.UPDATE_CONTACT:
+      return {
+        ...state,
+        error: action.payload.error,
+      };
+
+    case UserActionTypes.DELETE_CONTACT:
+      return {
+        ...state,
+        error: action.payload.error,
       };
 
     default:
